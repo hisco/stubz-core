@@ -12,6 +12,7 @@ script:
 # after_script: npm install coveralls@3.0.1 && npm run test-ci && cat ./coverage/lcov.info
 #   | coveralls
 deploy:
+  skip_cleanup: true
   provider: npm
   email: hisco@googlegroups.com
   api_key:
