@@ -1,7 +1,13 @@
-import { HTTPRouter } from './http-router';
+import { HTTPRouter, HTTPRouterRequest, HTTPRouterResponse } from './http-router';
 import { StubzRouteResponse, StubzRouteStaticResponse } from './responses';
 import { StubzPlugin, StubzVariation, StubzServer } from '../components/components';
 
+interface StubzHTTPApplicationServer extends StubzServer{
+    routerApplication:{
+        use(route:string|RegExp, router:HTTPRouter):void;
+        use(router:HTTPRouter):void;
+    }
+}
 export class StubzRouter implements StubzPlugin{
     variations: StubzVariation<RouteVariation>[] = [];
     router: HTTPRouter;
@@ -20,12 +26,12 @@ export class StubzRouter implements StubzPlugin{
         this.route = route;
         this.router = router;
     }
-    async mount(server: StubzServer): Promise<void> {
+    async mount(server:StubzHTTPApplicationServer): Promise<void> {
         if (this.route){
-            server.expressApplication.use(this.route, this.router);
+            server.routerApplication.use(this.route, this.router);
         }
         else{
-            server.expressApplication.use(this.router);
+            server.routerApplication.use(this.router);
         }
         this.setVariationsByName({});
     }    
@@ -33,7 +39,7 @@ export class StubzRouter implements StubzPlugin{
         this.clearRouter();
     }
     private clearRouter(){
-        this.router.stack.length = 0;
+        this.router.clearRoutes();
     }
     setVariationsByName(nameStatus: {[key:string]:boolean}): void {
         const disabledVariations:string[] = [];
@@ -87,11 +93,12 @@ export class StubzRouter implements StubzPlugin{
                         stubzRouteResponse = new StubzRouteStaticResponse(stubzRouteResponse);
                     }
                     if (stubzRouteResponse instanceof StubzRouteStaticResponse){
-                        f(pathName , (req:any,res:any)=>{
+                        const staticRouteResponse = <StubzRouteStaticResponse>stubzRouteResponse;
+                        f(pathName , (req:HTTPRouterRequest,res:HTTPRouterResponse)=>{
                             res
-                                .set(stubzRouteResponse.headers)
-                                .status(stubzRouteResponse.statusCode)
-                                .send(stubzRouteResponse.content);
+                                .set(staticRouteResponse.headers)
+                                .status(staticRouteResponse.statusCode)
+                                .send(staticRouteResponse.content);
                         });
                     }
                     else if (typeof stubzRouteResponse == 'function'){
