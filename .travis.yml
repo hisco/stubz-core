@@ -17,5 +17,5 @@ deploy:
   api_key:
     secure: LW1w7/eMF+pxGHbea+/YvaWhXkKvPjTuNOr10Vo+VZ0hPwaRwthg7Bx4vMmFJrThS/sA+N5Kf2BAvFwgRECJu8J+9MDdF8OGvXBeoHZ9QMPPeFEBUqYgmf1Amq0eK4X9Ih26KHwH3VleUB3Ubp8RIRMygKAceXqnqHBiNVnvdQo2h+M2dVn0c9BDPju4OeGHltpMDYVP1T7eaV9MHvCy2HtxNkKw1JBXcs1vAJ2qKGyLPelSyE1rMrSw4pBn8wFw8JcqnJQ+pEtSk5Ky2pB3P9EL3zBTwkj5P1uWPMEGbzmFhbvAr0ETgU/UPjHFVgLJbpaDk7x9X45bTCPNnl+smOoHJVApTNj0GoQEqUBLcdr/l1yHohxL/vTKHoK3TuwMfRwRG25vimbAt/vW1vDA9I+uZbnMciprnKQQlQzRsc8gSSSz59AXGtoNVdgWhDsUjlFbpMuNgNZwsBI3gxBb0BwlBaHVLbLpPn8o1B8NLMyPn8LZtkFBKE645cv9I9d7taM9zEnfXIB33MQahJje79voatItqH3tUJMm9g8YpkPp0I3uukiDNcr+mkEYw6VTW0nYzZLVZ9lzlX7qZ7d9z+w/ZReNsurvvMVf+T6QRjh2s4ed+m8aE1uNugocu3pARxoqTZPxQsOv1a9PWl96c9M+UsC3WF6bukj6Ydclu6I=
   on:
-    tags: true
+    branch: "master"
     repo: hisco/stubz-core
