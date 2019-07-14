@@ -2,8 +2,11 @@
   "name": "@stubz/core",
   "version": "0.0.1",
   "description": "",
-  "main": "dist/components.ts",
-  "types": "dist/components.d.ts",
+  "main": "dist/index.ts",
+  "types": "dist/index.d.ts",
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "build": "tsc",
     "test": "mocha --recursive --reporter spec",
