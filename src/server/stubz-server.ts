@@ -2,7 +2,7 @@ import {Server , createServer , RequestListener, IncomingMessage, ServerResponse
 
 export class StubzHTTPServer{
     server: Server;
-    ports: number[] = [];
+    ports: (string|number)[] = [];
     requestListener: RequestListener;
     constructor({
         server,
@@ -10,7 +10,7 @@ export class StubzHTTPServer{
         requestListener
     }:{
         server? : Server,
-        ports: number[],
+        ports: (string|number)[],
         requestListener?: RequestListener
     }){
         this.requestListener = requestListener;
