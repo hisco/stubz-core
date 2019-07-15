@@ -120,6 +120,9 @@ export class StubzRouter implements StubzPlugin{
     get(path: string , cb : StubzRouteResponse):StubzAction{
         return this.routeGeneric('get' , path , cb);
     }
+    post(path: string , cb : StubzRouteResponse):StubzAction{
+        return this.routeGeneric('post' , path , cb);
+    }
     delete(path: string , cb : StubzRouteResponse):StubzAction{
         return this.routeGeneric('delete' , path , cb);
     }
