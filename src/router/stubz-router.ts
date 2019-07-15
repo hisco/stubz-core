@@ -165,19 +165,23 @@ class StubzAction{
         this.setOptionInternal();
         return this;
     }
-    routerOnlyOption(){
+    routerOnlyOption():StubzAction{
         this.isUniq = true;
         this.setOptionInternal();
+        return this;
     }
-    commonOption(){
+    commonOption():StubzAction{
         this.isUniq = false;
         this.setOptionInternal();
+        return this;
     }
-    defaultOn(){
+    defaultOn():StubzAction{
         this.stubzVariation.defaultStatus = true;
+        return this;
     }
-    defaultOff(){
+    defaultOff():StubzAction{
         this.stubzVariation.defaultStatus = false;
+        return this;
     }
 }
 interface RouteVariation{

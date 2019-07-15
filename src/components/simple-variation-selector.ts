@@ -1,16 +1,37 @@
 import { StubzPluginContainer } from './stubz-plugin-container';
+import { StubzVariation } from './stubz-server-plugin';
 
 export interface StubzVariationSelector {
-    plugins:StubzPluginContainer;
+    pluginsContainer:StubzPluginContainer;
+    setVariationsByName(nameStatus:{[key:string]:boolean}):void;
+    getPluginsStatus():PluginStatus[];
 }
 
-export class StubzSimpleVariationSelector{
-    plugins:StubzPluginContainer;
+export class StubzSimpleVariationSelector implements StubzVariationSelector{
+    pluginsContainer:StubzPluginContainer;
     constructor({
-        plugins
+        pluginsContainer
     }:{
-        plugins:StubzPluginContainer;
+        pluginsContainer:StubzPluginContainer;
     }){
-        this.plugins = plugins;
+        this.pluginsContainer = pluginsContainer;
     }
+    setVariationsByName(nameStatus:{[key:string]:boolean}){
+        this.pluginsContainer.plugins.forEach(pluginWithStatus => {
+            pluginWithStatus.plugin.setVariationsByName(nameStatus)
+        });
+    }
+    getPluginsStatus():PluginStatus[]{
+        return this.pluginsContainer.plugins.map(pluginWithStatus=>({
+            status : pluginWithStatus.status,
+            name: pluginWithStatus.plugin.name,
+            variations : pluginWithStatus.plugin.variations
+        }))
+    }
+}
+
+export interface PluginStatus{
+    status: boolean;
+    name: string;
+    variations: StubzVariation<any>[]
 }
