@@ -97,8 +97,13 @@ export class StubzRouter implements StubzPlugin{
                         f(pathName , (req:HTTPRouterRequest,res:HTTPRouterResponse)=>{
                             res
                                 .set(staticRouteResponse.headers)
-                                .status(staticRouteResponse.statusCode)
-                                .send(staticRouteResponse.content);
+                                .status(staticRouteResponse.statusCode);
+                            if (staticRouteResponse.hasOwnProperty('json')){
+                                res.json(staticRouteResponse.json);
+                            }
+                            else{
+                                res.send(staticRouteResponse.content);
+                            }
                         });
                     }
                     else if (typeof stubzRouteResponse == 'function'){

@@ -1,20 +1,24 @@
+import { RequestListener } from "http";
 
-export type StubzRouteResponse = StubzRouteStaticResponse;
+export type StubzRouteResponse = StubzRouteStaticResponse | RequestListener;
 export class StubzRouteStaticResponse{
     public statusCode: string;
-    public content: string | Buffer;
+    public content: any;
+    public json: any;
     public headers: {[key:string]:string|string[]};
-    constructor({
-        statusCode,
-        content,
-        headers
-    }:{
+    constructor(responseOptions:{
         statusCode?: string;
-        content?: string| Buffer;
+        content?: any;
+        json?: any;
         headers?: {[key:string]:string|string[]}
     }){
-        this.headers = headers || {};
-        this.content = content;
-        this.statusCode = statusCode == undefined ? '200' : statusCode;
+        this.headers = responseOptions.headers || {};
+        if (responseOptions.hasOwnProperty('json')){
+            this.json = responseOptions.json;
+        }
+        else{
+            this.content = responseOptions.content;
+        }
+        this.statusCode = responseOptions.statusCode == undefined ? '200' : responseOptions.statusCode;
     }
 }

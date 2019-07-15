@@ -16,6 +16,7 @@ export interface HTTPRouterRequest extends IncomingMessage{
 }
 export interface HTTPRouterResponse extends OutgoingMessage{
     set(headers:{[key:string]:string|string[]}):HTTPRouterResponse;
-    send(content:string|Buffer):HTTPRouterResponse;
+    send(content:any):HTTPRouterResponse;
+    json(json:any):HTTPRouterResponse;
     status(statusCode: string):HTTPRouterResponse;
 }
