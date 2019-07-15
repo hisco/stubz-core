@@ -52,7 +52,7 @@ export class StubzHTTPServer{
         await this.listen(this.ports);
     }
     async stop(){
-        return new Promise((resolve, reject)=>{
+        await new Promise((resolve, reject)=>{
             this.server.close(function (){
                 const error = arguments[0];
                 if (error){

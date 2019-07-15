@@ -148,7 +148,6 @@ class StubzAction{
         public stubzVariation: StubzVariation<RouteVariation>&{routerName: string}
     ){
         this.routerName = this.stubzVariation.routerName;
-        this.optionName = this.stubzVariation.name;
     }
     private setOptionInternal(){
         if (this.isUniq && this.routerName){
