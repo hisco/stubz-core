@@ -151,11 +151,11 @@ class StubzAction{
         this.optionName = this.stubzVariation.name;
     }
     private setOptionInternal(){
-        if (this.isUniq){
-            this.stubzVariation.name = `${this.optionName}`;
+        if (this.isUniq && this.routerName){
+            this.stubzVariation.name = `${this.routerName}.${this.optionName}`;
         }
         else{
-            this.stubzVariation.name = `${this.routerName}.${this.optionName}`;
+            this.stubzVariation.name = `${this.optionName}`;
         }
     }
     setOption(name:string):StubzAction{
