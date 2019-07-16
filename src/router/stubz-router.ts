@@ -13,6 +13,7 @@ export class StubzRouter implements StubzPlugin{
     router: HTTPRouter;
     public name: string = `random-${Math.random()}`;
     public route: string| RegExp;
+    private varationsStatus: {[key:string]: boolean} = {};
     constructor({
         name,
         route,
@@ -41,6 +42,9 @@ export class StubzRouter implements StubzPlugin{
     private clearRouter(){
         this.router.clearRoutes();
     }
+    getVarationsStatus():{[key:string]: boolean}{
+        return this.varationsStatus;
+    }
     setVariationsByName(nameStatus: {[key:string]:boolean}): void {
         const disabledVariations:string[] = [];
         const enabledVariations:string[] = [];
@@ -68,8 +72,10 @@ export class StubzRouter implements StubzPlugin{
         this.clearRouter();
         this.variations.forEach((variation : StubzVariation<RouteVariation>)=>{
             const status = cb(variation);
+            this.varationsStatus[variation.name]=false;
             if (status){
                 variation.variationData.mount();
+                this.varationsStatus[variation.name] = true;
             }
         })
     }
