@@ -35,7 +35,7 @@ export class StubzSimpleVariationSelector implements StubzVariationSelector{
             const statusDict = pluginWithStatus.plugin.getVarationsStatus();
             Object.keys(statusDict).forEach((key)=>{
                 if (!dict.hasOwnProperty(key)){
-                    statusDict[key] = statusDict[key];
+                    dict[key] = statusDict[key];
                 }
             })
         });
