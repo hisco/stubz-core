@@ -17,16 +17,17 @@ export class StubzPluginContainer {
                 const foundPlugin = this.getPluginByName(plugin.name);
                 if (foundPlugin){
                     this.removePluginStatus(foundPlugin);
-                    const newPlugin = {
-                        plugin,
-                        status: false
-                    };
-                    this.plugins.push(newPlugin);
+                    
                     await foundPlugin.plugin.unmount(this.stubzServer);
-                    newPlugin.status = true;
                 }
+                const newPlugin = {
+                    plugin,
+                    status: false
+                };        
                 
+                this.plugins.push(newPlugin);
                 await plugin.mount(this.stubzServer);
+                newPlugin.status = true;
             })
         );
     }
