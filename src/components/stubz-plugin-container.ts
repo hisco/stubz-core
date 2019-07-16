@@ -1,7 +1,6 @@
 import { StubzPlugin } from './stubz-server-plugin';
 import { StubzServer } from './stubz-server';
 
-
 export class StubzPluginContainer {
     public plugins: PluginWithStatus[] = [];
     private stubzServer: StubzServer;
@@ -41,6 +40,9 @@ export class StubzPluginContainer {
                 }
             })
         )
+    }
+    async clearPlugins(){
+       return this.removePlugins( this.plugins.map(ps=>ps.plugin) );
     }
     private removePluginStatus(pluginWithStatus: PluginWithStatus){
         const index = this.plugins.indexOf(pluginWithStatus);
